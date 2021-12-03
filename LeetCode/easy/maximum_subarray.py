@@ -1,37 +1,44 @@
-class Solution:
-    '''
-        <-- Slow Solution -->
+'''
+    Solution Solution: Brute Force
 
-        def get_sums(self, nums: list, start, end):
-            sum = 0
+'''
 
-            for i in range(start, end + 1):
-                sum += nums[i]
 
-            return sum
+class Solution1:
+    def get_sums(self, nums: list, start, end):
+        sum = 0
 
-        def maxSubArray(self, nums: list) -> int:
-            target_length = 0
+        for i in range(start, end + 1):
+            sum += nums[i]
 
-            # set it to the lowest possible value
-            largest_sum = float("-inf")
+        return sum
 
-            while target_length <= len(nums):
-                # check all the sub-arrays of length target_length
-                for i in range(0, len(nums)):
-                    if i + target_length < len(nums):
-                        sub_array_sum = self.get_sums(nums, i, i + target_length)
+    def maxSubArray(self, nums: list) -> int:
+        target_length = 0
 
-                        if sub_array_sum > largest_sum:
-                            largest_sum = sub_array_sum
+        # set it to the lowest possible value
+        largest_sum = float("-inf")
 
-                target_length += 1
+        while target_length <= len(nums):
+            # check all the sub-arrays of length target_length
+            for i in range(0, len(nums)):
+                if i + target_length < len(nums):
+                    sub_array_sum = self.get_sums(nums, i, i + target_length)
 
-            return largest_sum
+                    if sub_array_sum > largest_sum:
+                        largest_sum = sub_array_sum
 
-        <!-- Slow Solution -->
-    '''
+            target_length += 1
 
+        return largest_sum
+
+
+'''
+    Solution 2 [Accepted]: divide and conquer
+'''
+
+
+class Solution2:
     def maxSubArrayHelper(self, nums, start_index, end_index):
         # base case is when we have an array of 1 element or 0 elements
         if start_index <= end_index:
@@ -78,5 +85,5 @@ class Solution:
         return self.maxSubArrayHelper(nums, 0, len(nums) - 1)
 
 
-solution = Solution()
+solution = Solution2()
 print(solution.maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
