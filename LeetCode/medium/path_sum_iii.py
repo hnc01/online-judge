@@ -42,11 +42,7 @@ class Solution:
             return 0
 
         # when we're done with exploring a path starting with parent, now we need to explore paths starting with children
-        parent_number_of_paths = self.dfs(root, 0, targetSum)
-        left_child_number_of_paths = self.pathSum(root.left, targetSum)
-        right_child_number_of_paths = self.pathSum(root.right, targetSum)
-
-        return parent_number_of_paths + left_child_number_of_paths + right_child_number_of_paths
+        return self.dfs(root, 0, targetSum) + self.pathSum(root.left, targetSum) + self.pathSum(root.right, targetSum)
 
 
 # tree = [10, 5, -3, 3, 2, None, 11, 3, -2, None, 1]
