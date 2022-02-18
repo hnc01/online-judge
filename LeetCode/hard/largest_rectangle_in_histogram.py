@@ -89,7 +89,7 @@ class Solution2:
     By getting the minimum in O(nlogn) time, we can continue with the divide and conquer approach just like Solution2.
     Note that in Solution2 we were getting the minimum height within a range in O(n) time.
     
-    Time complexity : O(nlogn). Segment tree takes \log nlogn for a total of nn times.
+    Time complexity : O(nlogn). Segment tree takes O(logn) for a total of n times.
     Space complexity : O(n). Space required for Segment Tree.
 '''
 
