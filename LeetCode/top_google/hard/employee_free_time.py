@@ -36,17 +36,6 @@ class Interval:
 
 
 class Solution:
-    def getIntersection(self, firstInterval, secondInterval):
-        if firstInterval[0] > secondInterval[0]:
-            firstInterval, secondInterval = secondInterval, firstInterval
-
-        # now that we are sure that firstInterval <= secondInterval, we can proceed with finding intersection
-        # we know that there is intersection if secondInterval[0] <= firstInterval[1]
-        if secondInterval[0] <= firstInterval[1]:
-            return (True, (max(firstInterval[0], secondInterval[0]), min(firstInterval[1], secondInterval[1])))
-        else:
-            return (False, (None, None))
-
     def isValidRange(self, startToTimestamp, limit, axisValues, rangeEnd, n):
         validTimestamps = []
 
