@@ -154,6 +154,7 @@ class Solution2:
     Accepted
 '''
 
+
 class Solution3:
     def shortestPath(self, grid: [[int]], k: int) -> int:
         rows = len(grid)
@@ -168,12 +169,19 @@ class Solution3:
         # to not visited already seen cells more than once
         # not only will we save the cells we've seen but also the remaining k we've seen with them
         # that way, if we reach a cell with a different number of remaining k, we can still explore that path
+
+        '''
+            Without the obstacle elimination quota, we would only visit the intermediate cell once, while only one 
+            of the two paths can lead us to the target, since in one of the paths we don't have sufficient quota to 
+            get through. Therefore, it is critical to keep the quota information, so that we can revisit the same cell 
+            with different quotas.
+        '''
         visited = set()
 
         while len(queue) > 0:
             cell, stepsTaken, kLeft = queue.pop(0)
 
-            if cell == (rows-1, cols - 1):
+            if cell == (rows - 1, cols - 1):
                 # we've reached our destination so we return its shortest path
                 return stepsTaken
 
@@ -195,7 +203,7 @@ class Solution3:
 
                         # else we can add this cell to our path because we can't reach it from current parent cell
                     else:
-                        if (adjacent,  kLeft) not in visited:
+                        if (adjacent, kLeft) not in visited:
                             queue.append((adjacent, stepsTaken + 1, kLeft))
                             # in BFS algo, whenever we see a new cell, we mark it as seen (i.e., we don't wait
                             # until all its adjacents to be processed)
