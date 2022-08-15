@@ -4,7 +4,7 @@ class Solution:
             1- sort the tiles by li in ascending order
 
             2- Try placing the carpet at every starting position of a range of tiles. For example, if we have [1,5], [10, 11],
-            [12, 18], we first try to placet the carpet at position 1, then 5 and then 12. Why? Because starting the carpet at any other
+            [12, 18], we first try to placet the carpet at position 1, then 10 and then 12. Why? Because starting the carpet at any other
             position will lead to the carpet covering tiles that are not white and we don't care about such placements.
 
             3- After placing the carpet[0] at a known position (starting range of tiles), we need to check where our carpet[1] will land. This can be done by simply adding carpetLen to carpet[0]. Now, we have to find the number of white tiles between carpet[0] and carpet[1].
