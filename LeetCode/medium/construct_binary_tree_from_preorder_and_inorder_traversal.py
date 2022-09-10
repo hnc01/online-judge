@@ -89,6 +89,39 @@ class Solution:
         return self.build_tree_helper(None, set(preorder), preorder, inorder)
 
 
+# better solution that I came up with during revision
+class Solution2:
+    def buildTree(self, preorder: [int], inorder: [int]) -> [TreeNode]:
+        if len(inorder) == 0:
+            # we don't have any nodes in current subtree => it's a leaf
+            return None
+        else:
+            # current root of the subtree is the first element in preorder that's also in inorder
+            root = None
+            rootPreOrderIndex = -1
+
+            for i in range(0, len(preorder)):
+                if preorder[i] in inorder:
+                    # we found our root
+                    root = TreeNode(preorder[i])
+                    rootPreOrderIndex = i
+
+                    break
+
+            # now we need to find the index of root in inorder
+            rootInOrderIndex = inorder.index(root.val)
+
+            # everything < rootIndex is leftSubtree and everything > rootIndex is rightSubtree
+            leftInOrder = inorder[0:rootInOrderIndex]
+            rightInOrder = inorder[rootInOrderIndex + 1:len(inorder)]
+
+            # excluding the current root from preorder: preorder[rootPreOrderIndex+1:]
+            root.left = self.buildTree(preorder[rootPreOrderIndex + 1:], leftInOrder)
+            root.right = self.buildTree(preorder[rootPreOrderIndex + 1:], rightInOrder)
+
+            return root
+
+
 root = Solution().buildTree([3, 9, 20, 15, 7], [9, 3, 15, 20, 7])
 
 to_string(root)

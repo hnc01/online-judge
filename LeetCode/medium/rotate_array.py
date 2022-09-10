@@ -93,6 +93,59 @@ class Solution3:
                 carry = nums[start_cycle_index]
 
 
+# same approach as above but reduced k to smaller number by eliminating the rotations that would make
+# nums just go back to how its original value
+class Solution4:
+    def rotate(self, nums: [int], k: int) -> None:
+        # no need to perform any changes because shifting the array
+        # by its length will result in the same array
+        if k == len(nums):
+            return
+
+        # next, we need to remove from the number of rotations that would
+        # just lead to nums getting back to nums => all the len(nums) out of k
+        if k > len(nums):
+            k = k % len(nums)
+
+        # the idea now is that we need to compute where each index will end up
+        # also, we're sure that we need to make n replacements because we need
+        # shift every element k places
+
+        indexToShift = 0
+        valueToShift = nums[0]
+
+        startCycleIndex = 0
+
+        n = len(nums)
+
+        shiftedElementsCount = 0
+
+        while shiftedElementsCount < n:
+            destinationIndex = (indexToShift + k) % n
+
+            # we need to put valueToShift in destinationIndex
+            valueToShift, nums[destinationIndex] = nums[destinationIndex], valueToShift
+
+            indexToShift = destinationIndex
+
+            shiftedElementsCount += 1
+
+            if destinationIndex == startCycleIndex:
+                # we ended up where we started
+                # so we need to start at the next element from where we started
+                startCycleIndex += 1
+
+                if startCycleIndex >= len(nums):
+                    # no more cycles to consider so we break the loop
+                    break
+
+                indexToShift = startCycleIndex
+                # in this case we don't have a carry so we need
+                # to reset the cycle by resetting the start index and the carry
+                # just like at the beginning how we set carry to be first element
+                valueToShift = nums[startCycleIndex]
+
+
 nums = [1, 2, 3, 4, 5, 6, 7]
 k = 3
 

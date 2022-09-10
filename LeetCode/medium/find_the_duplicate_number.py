@@ -196,6 +196,9 @@ class Solution6:
 
         # PHASE 2
         # we put the tortoise at the beginning
+        # we do the same as Linked List Cycle II => we put the hare at the intersection which is tortoise
+        # and then we put the tortoise back at the start
+        hare = tortoise
         tortoise = 0
 
         # we keep the hare in the same position where the previous phase ended

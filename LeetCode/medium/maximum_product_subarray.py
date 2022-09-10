@@ -72,6 +72,9 @@ class Solution2:
             # one we've seen and will therefore give us the change to negate the negative chain in the future.
 
             # we need to make sure we don't alter max_so_far before we calculate min_so_far
+
+            # the below 3 statements can be replaced by:
+            # minSoFar, maxSoFar = min(nums[i], maxSoFar * nums[i], minSoFar * nums[i]), max(nums[i], maxSoFar * nums[i], minSoFar * nums[i])
             temp_max = int(max(nums[i], max_so_far * nums[i], min_so_far * nums[i]))
             min_so_far = int(min(nums[i], max_so_far * nums[i], min_so_far * nums[i]))
 
